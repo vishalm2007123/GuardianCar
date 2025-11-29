@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GuardianCar – Mobile App Demo</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="theme-dark">
+
+  <header class="navbar">
+    <div class="logo">🚗 GuardianCar</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="appdemo.html" class="active">App Demo</a>
+      <a href="pricing.html">Plans</a>
+      <a href="admin.html">Admin</a>
+    </nav>
+  </header>
+
+  <main class="page">
+    <section class="section">
+      <h1>Mobile App Preview</h1>
+      <p class="muted">This shows how the GuardianCar app could look for owners.</p>
+
+      <div class="appdemo-layout">
+
+        <div class="card phone-card">
+          <div class="phone-frame">
+            <div class="phone-screen">
+              <h3>GuardianCar</h3>
+
+              <div class="app-row">
+                <span>Ignition</span>
+                <strong id="aIgn">OFF</strong>
+              </div>
+              <div class="app-row">
+                <span>Speed</span>
+                <strong id="aSpeed">0 km/h</strong>
+              </div>
+              <div class="app-row">
+                <span>Immobiliser</span>
+                <strong id="aImmo">ALLOWED</strong>
+              </div>
+
+              <div class="app-buttons">
+                <button class="btn primary full" id="aBtnIgn">Start / Stop</button>
+                <button class="btn alt full" id="aBtnSpeed">Simulate Drive</button>
+                <button class="btn danger full" id="aBtnImmo">Immobilise</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Owner Experience</h2>
+          <p class="muted">
+            In a real deployment, this app would connect to a secure backend via HTTPS,
+            showing ignition alerts, live tracking, and immobiliser status in real-time.
+          </p>
+          <ul class="info-list">
+            <li>Push notifications on ignition or tamper events.</li>
+            <li>One-tap “Not me” action to protect the vehicle.</li>
+            <li>Queued immobilisation if the vehicle is still moving.</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>GuardianCar – Mobile App Concept</p>
+  </footer>
+
+  <script>
+    const appState = { ign: false, speed: 0, immo: false };
+
+    function renderApp() {
+      document.getElementById('aIgn').textContent = appState.ign ? 'ON' : 'OFF';
+      document.getElementById('aSpeed').textContent = `${appState.speed} km/h`;
+      document.getElementById('aImmo').textContent = appState.immo ? 'IMMOBILISED' : 'ALLOWED';
+    }
+
+    document.getElementById('aBtnIgn').onclick = () => {
+      appState.ign = !appState.ign;
+      if (!appState.ign) appState.speed = 0;
+      renderApp();
+    };
+
+    document.getElementById('aBtnSpeed').onclick = () => {
+      if (!appState.ign) return;
+      appState.speed = Math.floor(Math.random() * 100);
+      renderApp();
+    };
+
+    document.getElementById('aBtnImmo').onclick = () => {
+      if (appState.speed > 3) {
+        alert('In real system, immobiliser would queue until the car stops.');
+      }
+      appState.immo = !appState.immo;
+      renderApp();
+    };
+
+    renderApp();
+  </script>
+</body>
+</html>

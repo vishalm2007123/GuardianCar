@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GuardianCar – Admin Panel</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="theme-dark">
+
+  <header class="navbar">
+    <div class="logo">🚗 GuardianCar</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="appdemo.html">App Demo</a>
+      <a href="pricing.html">Plans</a>
+      <a href="admin.html" class="active">Admin</a>
+    </nav>
+  </header>
+
+  <main class="page">
+    <section class="section">
+      <h1>Admin Overview</h1>
+      <p class="muted">High-level system stats (sample data for hackathon).</p>
+
+      <div class="dash-layout">
+        <div class="card">
+          <h2>Today’s Summary</h2>
+          <ul class="status-list">
+            <li>Ignition events: <strong>42</strong></li>
+            <li>Immobiliser triggers: <strong>7</strong></li>
+            <li>Pending cases executed: <strong>5</strong></li>
+            <li>Tamper alerts: <strong>1</strong></li>
+          </ul>
+        </div>
+
+        <div class="card span-2">
+          <h2>Sample Event Timeline</h2>
+          <ul class="event-list">
+            <li>[09:10] Ignition ON – Vehicle ABC-1234</li>
+            <li>[09:12] Speed 56 km/h – Tracking started</li>
+            <li>[09:16] Pending immobiliser queued (overspeed)</li>
+            <li>[09:19] Vehicle slowed to 2 km/h – Immobiliser executed</li>
+            <li>[10:05] Tamper alert – device disconnected</li>
+          </ul>
+        </div>
+
+        <div class="card span-2">
+          <h2>Admin Actions (Future API)</h2>
+          <p class="muted small">These are placeholders that would call backend APIs in a real system.</p>
+          <div class="control-buttons">
+            <button class="btn primary">Export Event Logs</button>
+            <button class="btn alt">View Raw Telemetry</button>
+            <button class="btn danger">Simulate System Alert</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>GuardianCar – Admin Panel</p>
+  </footer>
+</body>
+</html>

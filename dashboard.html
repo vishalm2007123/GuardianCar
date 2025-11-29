@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GuardianCar – User Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="theme-dark">
+
+  <header class="navbar">
+    <div class="logo">🚗 GuardianCar</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="dashboard.html" class="active">Dashboard</a>
+      <a href="appdemo.html">App Demo</a>
+      <a href="pricing.html">Plans</a>
+      <a href="admin.html">Admin</a>
+    </nav>
+  </header>
+
+  <main class="page">
+    <section class="section">
+      <h1>Vehicle Dashboard</h1>
+      <p class="muted">Simulated live data from your GuardianCar device.</p>
+
+      <div class="dash-layout">
+        <!-- Status cards -->
+        <div class="card">
+          <h2>Current Status</h2>
+          <ul class="status-list">
+            <li>Speed: <strong id="dSpeed">0 km/h</strong></li>
+            <li>Ignition: <strong id="dIgn">OFF</strong></li>
+            <li>Immobiliser: <strong id="dImmo">ALLOWED</strong></li>
+            <li>Pending Immobilise: <strong id="dPending">NO</strong></li>
+          </ul>
+        </div>
+
+        <!-- Controls -->
+        <div class="card">
+          <h2>Simulation Controls</h2>
+          <p class="muted small">These buttons simulate how your ESP32 logic behaves.</p>
+          <div class="control-buttons">
+            <button class="btn primary full" id="btnIgn">Toggle Ignition</button>
+            <button class="btn alt full" id="btnSpeed">Random Speed</button>
+            <button class="btn danger full" id="btnImmo">Toggle Immobiliser</button>
+          </div>
+        </div>
+
+        <!-- Event log -->
+        <div class="card span-2">
+          <h2>Recent Events</h2>
+          <div id="dLog" class="event-log"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>GuardianCar – Dashboard Demo</p>
+  </footer>
+
+  <script>
+    const state = { ignition: false, speed: 0, immobiliser: false, pending: false };
+
+    const dSpeed = document.getElementById('dSpeed');
+    const dIgn = document.getElementById('dIgn');
+    const dImmo = document.getElementById('dImmo');
+    const dPending = document.getElementById('dPending');
+    const dLog = document.getElementById('dLog');
+
+    function log(msg) {
+      const e = document.createElement('div');
+      e.className = 'log-entry';
+      e.textContent = `[${new Date().toLocaleTimeString()}] ${msg}`;
+      dLog.prepend(e);
+    }
+
+    function render() {
+      dSpeed.textContent = `${state.speed} km/h`;
+      dIgn.textContent = state.ignition ? 'ON' : 'OFF';
+      dImmo.textContent = state.immobiliser ? 'IMMOBILISED' : 'ALLOWED';
+      dPending.textContent = state.pending ? 'YES' : 'NO';
+    }
+
+    document.getElementById('btnIgn').onclick = () => {
+      state.ignition = !state.ignition;
+      if (!state.ignition) state.speed = 0;
+      log(`Ignition ${state.ignition ? 'ON' : 'OFF'}.`);
+      render();
+    };
+
+    document.getElementById('btnSpeed').onclick = () => {
+      if (!state.ignition) return log('Cannot change speed while ignition is OFF.');
+      state.speed = Math.floor(Math.random() * 90);
+      log(`Speed changed to ${state.speed} km/h.`);
+      render();
+    };
+
+    document.getElementById('btnImmo').onclick = () => {
+      if (!state.immobiliser && state.speed > 3) {
+        state.pending = true;
+        log('Immobiliser queued (unsafe speed).');
+      } else {
+        state.immobiliser = !state.immobiliser;
+        state.pending = false;
+        log(`Immobiliser ${state.immobiliser ? 'activated' : 'disabled'}.`);
+      }
+      render();
+    };
+
+    setInterval(() => {
+      if (state.pending && state.speed <= 3) {
+        state.immobiliser = true;
+        state.pending = false;
+        log('Pending immobiliser executed (speed now safe).');
+        render();
+      }
+    }, 1000);
+
+    render();
+
+    
+  </script>
+  <section class="section map-section">
+  <h2>📍 Live Map (Demo)</h2>
+  <p class="muted small"></p>
+
+  <div class="map-container">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=77.5946,12.9716&z=13&size=650,450&l=map&pt=77.5946,12.9716,pm2rdm" 
+     alt="GPS Demo Map">
+
+
+    <div class="map-pin">
+      <span class="pulse"></span>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

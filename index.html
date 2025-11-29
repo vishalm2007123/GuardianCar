@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GuardianCar – Intelligent Vehicle Safety</title>
+  
+  <link rel="stylesheet" href="style.css" />
+
+  <script defer src="script.js"></script>
+</head>
+
+<body class="theme-dark">
+
+ 
+  <header class="navbar">
+    <div class="logo">🚗 GuardianCar</div>
+    <nav>
+      <a href="index.html" class="active">Home</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="appdemo.html">App Demo</a>
+      <a href="pricing.html">Plans</a>
+      <a href="admin.html">Admin</a>
+    </nav>
+    <button class="btn small" onclick="goLogin()">Login</button>
+  </header>
+
+  
+  <section class="hero">
+    <div class="hero-left">
+      <h1>Ultimate Protection for Every Vehicle</h1>
+      <p>
+        Real-time ignition alerts, safe immobilisation, live GPS tracking and tamper detection 
+        built for safety first, real-world theft prevention.
+      </p>
+      <div class="hero-buttons">
+        <a href="dashboard.html" class="btn primary large">View Live Dashboard</a>
+        <a href="pricing.html" class="btn ghost large">See Subscription Plans</a>
+      </div>
+      <p class="hero-note"> ESP32 + Web dashboard + smart immobiliser logic</p>
+    </div>
+
+    <div class="hero-right">
+      <div class="hero-card">
+        <p class="hero-label">Live Snapshot</p>
+        <h3>Vehicle ABC-1234</h3>
+        <ul>
+          <li>Ignition: <span class="tag tag-green">ON</span></li>
+          <li>Speed: <span>32 km/h</span></li>
+          <li>Immobiliser: <span class="tag tag-amber">Pending</span></li>
+        </ul>
+        <p class="muted small">Data simulated from prototype logic for demo.</p>
+      </div>
+    </div>
+  </section>
+
+ 
+  <section class="section">
+    <h2>Smart Features. Real Protection.</h2>
+    <div class="grid-3">
+      <div class="card feature-card">
+        <h3>Instant Ignition Alerts</h3>
+        <p>Owner receives an alert as soon as the ignition turns on, anywhere in the world.</p>
+      </div>
+
+      <div class="card feature-card">
+        <h3>Safe Immobiliser</h3>
+        <p>Engine is disabled only when speed ≤ 3 km/h to avoid accidents or sudden power cuts.</p>
+      </div>
+
+      <div class="card feature-card">
+        <h3>Live GPS & History</h3>
+        <p>Follow real-time movement and see historical routes during theft or tamper events.</p>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="section comparison">
+    <h2>Why GuardianCar Beats Traditional Anti-Theft Systems</h2>
+    <p class="muted center small">See how we compare with existing solutions</p>
+
+    <div class="comparison-table">
+      <div class="row header">
+        <div class="cell"></div>
+        <div class="cell bold">Traditional Systems</div>
+        <div class="cell bold highlight">GuardianCar</div>
+      </div>
+
+      <div class="row">
+        <div class="cell title">Instant Ignition Alerts</div>
+        <div class="cell"> Delayed / No Alerts</div>
+        <div class="cell highlight"> Real-time push alerts</div>
+      </div>
+
+      <div class="row">
+        <div class="cell title">Safe Immobilisation</div>
+        <div class="cell"> Cuts engine while moving</div>
+        <div class="cell highlight"> Activates only ≤ 3 km/h</div>
+      </div>
+
+      <div class="row">
+        <div class="cell title">Tamper Detection</div>
+        <div class="cell"> None</div>
+        <div class="cell highlight"> Alerts if unplugged</div>
+      </div>
+
+      <div class="row">
+        <div class="cell title">GPS Tracking</div>
+        <div class="cell"> Requires extra device</div>
+        <div class="cell highlight">  Built-in live tracking</div>
+      </div>
+
+      <div class="row">
+        <div class="cell title">Owner Response</div>
+        <div class="cell"> Manual</div>
+        <div class="cell highlight"> One-tap "Not Me"</div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="section alt">
+    <h2>How GuardianCar Works</h2>
+    <div class="grid-3">
+      <div class="card">
+        <h3>1️⃣ Detect</h3>
+        <p>ESP32 detects ignition, speed and tamper signals from hardware sensors.</p>
+      </div>
+      <div class="card">
+        <h3>2️⃣ Decide</h3>
+        <p>Safety logic decides whether to allow, queue, or execute immobilisation.</p>
+      </div>
+      <div class="card">
+        <h3>3️⃣ Protect</h3>
+        <p>Owner app and dashboard show live status, location, and event history.</p>
+      </div>
+    </div>
+
+    <br><br>
+
+    
+    <div style="display:flex; justify-content:center; margin-top:20px;">
+      <video src="real2.mp4" controls></video>
+    </div>
+  </section>
+
+  
+  <section class="section">
+    <h2>Simple Subscription for Serious Security</h2>
+    <p class="muted center">Upgrade from basic alerts to full theft prevention and fleet protection.</p>
+
+    <div class="pricing-grid">
+      <div class="card price-card">
+        <h3>Basic</h3>
+        <h1>₹0</h1>
+        <p>For demos and single-car monitoring.</p>
+        <ul class="price-list">
+          <li>Ignition alerts</li>
+          <li>Basic dashboard</li>
+        </ul>
+        <a href="pricing.html" class="btn ghost full">Start Free</a>
+      </div>
+
+      <div class="card price-card highlight">
+        <h3>Pro</h3>
+        <h1>₹699 / mo</h1>
+        <p>For real users and daily drivers.</p>
+        <ul class="price-list">
+          <li>Live GPS tracking</li>
+          <li>Safe immobiliser</li>
+          <li>Tamper alerts</li>
+        </ul>
+        <br>
+        <a href="pricing.html" class="btn primary full">Choose Pro</a>
+      </div>
+
+      <div class="card price-card">
+        <h3>Fleet</h3>
+        <h1>₹3999 / mo</h1>
+        <p>For companies & fleets.</p>
+        <ul class="price-list">
+          <li>Multi-vehicle dashboard</li>
+          <li>API + analytics</li>
+          <li>Priority support</li>
+        </ul>
+        <br>
+        <a href="pricing.html" class="btn ghost full">Talk to Us</a>
+      </div>
+    </div>
+  </section>
+
+ 
+  <section id="login" class="login-section">
+    <div class="login-card">
+      <h2>Login</h2>
+      <p class="muted small">Access your GuardianCar dashboard</p>
+
+      <form action="dashboard.html" method="post">
+        <label>Username</label>
+        <input type="text" id="username" placeholder="Enter username" required>
+
+        <label>Password</label>
+        <input type="password" id="password" placeholder="Enter password" required>
+
+        <input type="submit" value="Login">
+        <p class="muted small demo-info">
+          Demo users: <br>
+          <b>User:</b> user / user123 <br>
+          <b>Admin:</b> admin / admin123
+        </p>
+      </form>
+    </div>
+  </section>
+
+  
+  <footer class="footer">
+    <p>© 2025 GuardianCar – Intelligent Vehicle Security</p>
+  </footer>
+
+  
+  <div class="gc-chatbot-button" onclick="gcToggleChatbot()">
+    💬
+  </div>
+
+
+  <div id="gcChatbot" class="gc-chatbot-window">
+    <div class="gc-chatbot-header">
+      <span>🚗 GuardianCar Assistant</span>
+      <button onclick="gcToggleChatbot()">✖</button>
+    </div>
+
+    <div id="gcChatArea" class="gc-chatbot-messages">
+      <div class="gc-bot-msg">👋 Hi! I’m your GuardianCar assistant. How can I help?</div>
+      <div class="gc-bot-msg">
+        Try asking:<br>
+        • What is immobiliser?<br>
+        • How does “Not Me” work?<br>
+        • Is it safe?<br>
+        
+      </div>
+    </div>
+
+    <div class="gc-chatbot-input">
+      <input id="gcUserInput" type="text" placeholder="Type your question..." onkeydown="gcKey(event)">
+      <button onclick="gcSend()">➤</button>
+    </div>
+  </div>
+
+</body>
+</html>
+
