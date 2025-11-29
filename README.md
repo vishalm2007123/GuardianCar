@@ -68,7 +68,7 @@ Arduino (ESP32)
 
 Firebase / Blynk / IFTTT (demo-friendly backend)
 
-React Native / Flutter app (optional)
+React Native / Flutter app 
 
 Security
 
@@ -99,7 +99,7 @@ It is safe, fast, affordable, and scalable for bikes, cars, fleets, and EVs.
 🧑‍💻 Team — StackWave
 
 Built by first-year engineering students passionate about IoT, safety, and smart mobility.
-(Add your team member names here)
+(StackWave)
 
 📝 License
 
