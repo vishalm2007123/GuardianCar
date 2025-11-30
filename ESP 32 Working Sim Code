@@ -1,0 +1,169 @@
+#define PIR_PIN 27
+#define LED_PIN 26
+#define BUZZER_PIN 25
+#define RELAY_PIN 15
+#define GREEN_BTN 14
+#define RED_BTN 12
+#define SPEED_PIN 34   
+
+unsigned long pirTime = 0;
+unsigned long cooldownUntil = 0;
+
+bool pirTriggered = false;
+bool declinePressed = false;
+
+bool actionTaken = false;
+bool lastPirState = LOW;
+
+float currentSpeed = 0; 
+
+void setup() {
+  Serial.begin(115200);
+
+  pinMode(PIR_PIN, INPUT);
+  pinMode(LED_PIN, OUTPUT);
+  pinMode(RELAY_PIN, OUTPUT);
+
+  pinMode(GREEN_BTN, INPUT_PULLUP);
+  pinMode(RED_BTN, INPUT_PULLUP);
+
+  noTone(BUZZER_PIN);  // buzzer OFF
+
+  digitalWrite(RELAY_PIN, LOW);
+  digitalWrite(LED_PIN, LOW);
+
+  Serial.println("System Ready");
+}
+
+void loop() {
+
+  bool pirState = digitalRead(PIR_PIN);
+
+  // PIR trigger only on LOW → HIGH transition
+  if (!pirTriggered && millis() > cooldownUntil && pirState == HIGH && lastPirState == LOW) {
+    pirTriggered = true;
+    pirTime = millis();
+    currentSpeed = 0;
+
+    Serial.println("⚠ Motion detected!");
+    Serial.println("Speed: 0 km/h");
+    Serial.println("Accept or Decline?");
+
+    tone(BUZZER_PIN, 2000); 
+  }
+  lastPirState = pirState;
+
+  if (!pirTriggered) return;
+
+  unsigned long elapsed = millis() - pirTime;
+
+  // ACCEPT BEFORE 30 SEC
+  if (!actionTaken && digitalRead(GREEN_BTN) == LOW && elapsed < 30000) {
+    actionTaken = true;
+    Serial.println("You selected: ACCEPT");
+    Serial.println("Access Allowed");
+
+    noTone(BUZZER_PIN);  
+    resetSystem();
+    return;
+  }
+
+  // DECLINE BEFORE 30 SEC
+  if (!actionTaken && digitalRead(RED_BTN) == LOW && elapsed < 30000) {
+    actionTaken = true;
+    Serial.println("You selected: DECLINE");
+    Serial.println("Engine Immobilized");
+
+    digitalWrite(RELAY_PIN, HIGH);
+    digitalWrite(LED_PIN, HIGH);
+
+    noTone(BUZZER_PIN);  
+
+    resetSystem();
+    return;
+  }
+
+  // WAITING BEFORE 30 SEC
+  if (elapsed < 30000) return;
+
+  // ACCEPT AFTER 30 SEC
+  if (!actionTaken && digitalRead(GREEN_BTN) == LOW && elapsed >= 30000) {
+    actionTaken = true;
+    Serial.println("You selected: ACCEPT");
+    Serial.println("Access Allowed");
+
+    noTone(BUZZER_PIN); 
+    resetSystem();
+    return;
+  }
+
+  // DECLINE AFTER 30 SEC
+  if (!actionTaken && digitalRead(RED_BTN) == LOW && elapsed >= 30000) {
+    actionTaken = true;
+    declinePressed = true;
+
+    Serial.println("You selected: DECLINE");
+
+    digitalWrite(RELAY_PIN, HIGH);
+    digitalWrite(LED_PIN, HIGH);
+
+    noTone(BUZZER_PIN);  
+  }
+
+  // SPEED CONTROL USING POTENTIOMETER (if NOT declined)
+  if (!declinePressed && !actionTaken) {
+    int raw = analogRead(SPEED_PIN);         
+    currentSpeed = (raw / 4095.0) * 120.0;  
+
+    Serial.print("Speed: ");
+    Serial.print(currentSpeed);
+    Serial.println(" km/h");
+
+    delay(500);
+    return;
+  }
+
+  // DECLINE → SLOW DOWN
+  if (declinePressed) {
+    static unsigned long lastChange = 0;
+
+    if (millis() - lastChange >= 3000) {
+      lastChange = millis();
+
+      if (currentSpeed > 0) {
+        currentSpeed -= 5;
+        if (currentSpeed < 0) currentSpeed = 0;
+
+        Serial.print("Speed: ");
+        Serial.print(currentSpeed);
+        Serial.println(" km/h");
+      } else {
+        Serial.println("Speed: 0 km/h");
+        Serial.println("Engine Immobilized");
+
+        digitalWrite(RELAY_PIN, HIGH);
+        digitalWrite(LED_PIN, HIGH);
+
+        noTone(BUZZER_PIN);  // ensure buzzer OFF
+
+        resetSystem();
+      }
+    }
+  }
+}
+
+// RESET SYSTEM
+void resetSystem() {
+  pirTriggered = false;
+  declinePressed = false;
+  actionTaken = false;
+
+  currentSpeed = 0;
+
+  digitalWrite(RELAY_PIN, LOW);
+  digitalWrite(LED_PIN, LOW);
+
+  noTone(BUZZER_PIN);   
+
+  cooldownUntil = millis() + 3000; 
+}
