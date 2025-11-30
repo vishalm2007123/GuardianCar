@@ -1,0 +1,39 @@
+# 🚗 GuardianCar — Smart Anti-Theft IoT System  
+### Built by **StackWave** | Hackathon 2025
+
+GuardianCar is an intelligent vehicle-theft prevention system that alerts the owner **instantly when the car starts**, and allows a **one-tap response**:
+
+- **YES, it’s me**  
+- **NOT ME → Safe Immobilise + Live Tracking**  
+- **Track Vehicle**
+
+This repo contains the **ESP32 code**, **backend simulator**, and **presentation materials** used in the hackathon.
+
+---
+
+## 🎯 Features
+
+- 🚨 Ignition detection
+- 📲 Real-time mobile alert (via Firebase / Blynk / IFTTT)
+- 🛑 Safe Immobilisation (only when speed ≤ 3 km/h)
+- 📍 GPS tracking simulation
+- 🔧 Pending immobilise queue
+- 📝 Event logs
+- 🔒 Safety + fail-safe logic
+
+---
+
+## 🧩 Tech Stack
+
+- **Hardware:** ESP32 DevKit V1  
+- **Simulation Inputs:** Analog speed, button ignition  
+- **Dashboard Options:** Firebase / Blynk / IFTTT  
+- **Backend:** Local Python/Node simulator  
+- **App:** React Native / Blynk App
+
+---
+
+## 🔧 ESP32 Simulation Setup
+
+### **Wiring Diagram (Text Version)**
+
