@@ -35,6 +35,16 @@ Tamper detection & last-location fallback
 
 ESP32 vehicle module communicates with cloud + app to verify events instantly.
 
+<br />
+
+![main1](https://github.com/user-attachments/assets/d36ff800-a396-42c7-82cd-c03213ce9db8)
+
+<br />
+
+![main2](https://github.com/user-attachments/assets/24566a3e-066e-4d91-9764-021761a920f8)
+
+<br />
+
 🧩 Architecture Overview
 [Car Module: ESP32 + GPS + Relay]
           ↓
