@@ -3,7 +3,7 @@
 🚗 GuardianCar — Smart Anti-Theft & Safe Immobiliser System
 Built by StackWave • 1st Year Hackathon Project • 2025
 
-GuardianCar is an intelligent vehicle-security system that instantly alerts owners when their car starts, verifies whether the ignition is authorized, and safely immobilises the vehicle if theft is detected — without ever risking safety.
+GuardianCar is an intelligent vehicle security system that instantly alerts owners when their car starts, verifies whether the ignition is authorized, and safely immobilises the vehicle if theft is detected — without ever risking safety.
 Designed for rapid action, real-time tracking, and legally safe operation.
 
 ⭐ Key Features
@@ -121,6 +121,3 @@ MIT License (open-source for education & hackathons)
 /backend         → cloud backend or IFTTT/Firebase scripts
 /documents       → architecture diagrams, PPT, hackathon report
 
-🙌 Acknowledgments
-
-Thanks to our mentors, hackathon organizers, and the open-source community.
